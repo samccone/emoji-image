@@ -24,10 +24,21 @@ Promise.resolve(set)
 
         for(var i = 0; i < pxls.shape[0]; ++i) {
           for(var j = 0; j < pxls.shape[1]; ++j) {
-            for(var k = 0; k < pxls.shape[2]; ++k) {
-              rgb[k] += pxls.get(i, j, k)/4096;
+            if (pxls.get(i, j, 3) < 127) {
+              rgb[3]++
+            }
+            else {
+              for(var k = 0; k < pxls.shape[2]-1; ++k) {
+                rgb[k] += pxls.get(i, j, k);
+              }
             }
           }
+        }
+
+        if (rgb[3] != 4096) {
+          rgb[0] = rgb[0]/(4096-rgb[3]);
+          rgb[1] = rgb[1]/(4096-rgb[3]);
+          rgb[2] = rgb[2]/(4096-rgb[3]);
         }
 
         v.rgba = rgb;
@@ -35,7 +46,7 @@ Promise.resolve(set)
       });
     })
   });
-}, {concurrency: 1})
+}, {concurrency: 100})
 .then(function(set) {
-  fs.writeFileSync("done.json", JSON.stringify(set, null ,4));
+  fs.writeFileSync("foo.json", JSON.stringify(set, null ,4));
 })

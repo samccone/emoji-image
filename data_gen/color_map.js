@@ -90,4 +90,4 @@ for(var z = 0; z< 32; ++z) {
   arr = _.cloneDeep(bArr);
 }
 
-fs.writeFileSync('color_map.json', JSON.stringify(bArr, null));
+fs.writeFileSync('color_hard_map.js', "var goats ="+JSON.stringify(bArr, null)+";");
