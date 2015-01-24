@@ -1,0 +1,60 @@
+<html>
+  <script src="data_gen/color_map.js"></script>
+
+  <canvas></canvas>
+
+  <script>
+    var ctx;
+    var sprite, spriteCtx;
+
+    function getIndex(v) {
+      return [
+        ~~(Math.min(31, Math.max(v[0] / 8, 0))),
+        ~~(Math.min(31, Math.max(v[1] / 8, 0))),
+        ~~(Math.min(31, Math.max(v[2] / 8, 0)))
+      ]
+    }
+
+    function process() {
+      for(var x =20; x< 1200; x+=65) {
+        for(var y =20; y< 1000; y+=65) {
+          var a = ctx.getImageData(x,y,1,1);
+          var index = getIndex(a.data)
+          var coords = (goats[index[0]]
+            [index[1]]
+            [index[2]]
+            ).split(",");
+
+
+          var d = spriteCtx.getImageData(coords[0]*64,coords[1]*64,64,64);
+          ctx.putImageData(d, x, y)
+        }
+      }
+    }
+
+
+    var sprite = new Image()
+    var img = new Image()
+
+    sprite.onload = function() {
+      img.src= "hsv.png"
+      var spriteCanvas = document.createElement('canvas')
+      spriteCanvas.setAttribute('width', sprite.width+'px')
+      spriteCanvas.setAttribute('height', sprite.height+'px')
+      spriteCtx = spriteCanvas.getContext('2d');
+      spriteCtx.drawImage(sprite, 0, 0);
+    }
+
+    img.onload = function() {
+      var canvas = document.getElementsByTagName('canvas')[0];
+      canvas.setAttribute('width', img.width+'px')
+      canvas.setAttribute('height', img.height+'px')
+      ctx = canvas.getContext('2d');
+
+      ctx.drawImage(img, 0, 0);
+      process();
+    }
+
+    sprite.src="data_gen/base.png"
+  </script>
+</html>
