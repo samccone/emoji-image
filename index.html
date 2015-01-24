@@ -2,32 +2,47 @@
   <script src="data_gen/color_hard_map.js"></script>
 
   <canvas></canvas>
+  <canvas></canvas>
 
   <script>
     var ctx;
     var sprite, spriteCtx;
 
-    function getIndex(v) {
+    function getIndex(x,y,width,d) {
+      var index = (x + y * width) * 4;
       return [
-        ~~(Math.min(31, Math.max(v[0] / 8, 0))),
-        ~~(Math.min(31, Math.max(v[1] / 8, 0))),
-        ~~(Math.min(31, Math.max(v[2] / 8, 0)))
+        ~~(Math.min(31, Math.max(d[index] / 8, 0))),
+        ~~(Math.min(31, Math.max(d[index+1] / 8, 0))),
+        ~~(Math.min(31, Math.max(d[index+2] / 8, 0)))
       ]
     }
 
-    function process() {
-      for(var x =20; x< 1200; x+=65) {
-        for(var y =20; y< 1000; y+=65) {
-          var a = ctx.getImageData(x,y,1,1);
-          var index = getIndex(a.data)
+    function process(size, src) {
+      size = size || 8;
+
+      var a = src.getImageData(0,0,img.width, img.height);
+
+      for(var x =0; x< img.width; x+=size) {
+        for(var y =0; y< img.height; y+=size) {
+
+          var index = getIndex(x,y, img.width, a.data)
+
           var coords = (goats[index[0]]
             [index[1]]
             [index[2]]
             ).split(",");
 
 
-          var d = spriteCtx.getImageData(coords[0]*64,coords[1]*64,64,64);
-          ctx.putImageData(d, x, y)
+          ctx2.drawImage(sprite,
+            coords[0] * 64,
+            coords[1] * 64,
+            64,
+            64,
+            x-size/2,
+            y-size/2,
+            size,
+            size
+          )
         }
       }
     }
@@ -37,7 +52,7 @@
     var img = new Image()
 
     sprite.onload = function() {
-      img.src= "hsv.png"
+      img.src= "lol.jpg"
       var spriteCanvas = document.createElement('canvas')
       spriteCanvas.setAttribute('width', sprite.width+'px')
       spriteCanvas.setAttribute('height', sprite.height+'px')
@@ -49,10 +64,20 @@
       var canvas = document.getElementsByTagName('canvas')[0];
       canvas.setAttribute('width', img.width+'px')
       canvas.setAttribute('height', img.height+'px')
+      var canvas2 = document.getElementsByTagName('canvas')[1];
+      canvas2.setAttribute('width', img.width+'px')
+      canvas2.setAttribute('height', img.height+'px')
       ctx = canvas.getContext('2d');
+      ctx2 = canvas2.getContext('2d');
 
       ctx.drawImage(img, 0, 0);
-      process();
+      process(100, ctx);
+      process(40, ctx);
+      process(10, ctx);
+      process(15, ctx);
+      process(3, ctx);
+      process(2, ctx);
+      process(5, ctx2);
     }
 
     sprite.src="data_gen/base.png"
