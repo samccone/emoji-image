@@ -45,7 +45,7 @@ runPipeline = (src) ->
 clearDrawCanvas = ->
   $canvas2 = $(document.getElementsByTagName('canvas')[1])
   window.requestAnimationFrame ->
-    ctx2.clearRect(0, 0, $canvas2.width(), $canvas2.height())
+    ctx2.clearRect(0, 0, parseInt($canvas2.attr('width'), 10), parseInt($canvas2.attr('height'), 10))
 
 runSampler = (src) ->
   if ($('.clear-between').is(":checked"))
