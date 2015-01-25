@@ -60,9 +60,9 @@ run = (url) ->
 
       ctx.drawImage(img, 0, 0)
 
-      process(50, ctx, img)
-      process(20, ctx2, img)
-      process(10, ctx, img)
+      process(5, ctx, img)
+      # process(5, ct2, img)
+      # process(20, ctx2, img)
 
     img.src = url
 
