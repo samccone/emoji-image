@@ -42,11 +42,14 @@ runPipeline = (src) ->
   $('.pipeline input').on "change", -> runSampler(src)
   runSampler(src)
 
+clearDrawCanvas = ->
+  $canvas2 = $(document.getElementsByTagName('canvas')[1])
+  window.requestAnimationFrame ->
+    ctx2.clearRect(0, 0, $canvas2.width(), $canvas2.height())
+
 runSampler = (src) ->
   if ($('.clear-between').is(":checked"))
-    $canvas2 = $(document.getElementsByTagName('canvas')[1])
-    window.requestAnimationFrame ->
-      ctx2.clearRect(0, 0, $canvas2.width(), $canvas2.height())
+    clearDrawCanvas()
 
   $('.pipeline li').each (i, v) ->
     window.requestAnimationFrame ->
@@ -102,6 +105,10 @@ run = (url) ->
 
     img.src = url
 
+startProcessVideo = (video) ->
+  clearDrawCanvas()
+  processVideo(video)
+
 processVideo = (video) ->
   ctx.drawImage(video, 0,0)
   runPipeline(video)
@@ -113,5 +120,5 @@ stopVideo = (video) ->
 
 module.exports =
   process: run
-  processVideo: processVideo
+  processVideo: startProcessVideo
   stopVideo: stopVideo
