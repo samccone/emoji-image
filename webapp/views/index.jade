@@ -32,21 +32,27 @@ html
         .pipeline
           ul
             li
-              label Sample Rate
+              label Sample Rate 1
               input.sample(type="range", min=0, value=50, max=100, step=5)
+            li.group
+              ul
+                li
+                  label Sample Rate 2
+                  input.sample(type="range", min=0, value=10, max=100, step=5)
+                  .indent
+                    label(for="r1") Resampler?
+                    input.over-sample(type="checkbox", id="r1")
+            li.group
+              ul
+                li
+                  label Sample Rate 3
+                  input.sample(type="range", min=0, value=5, max=100, step=5)
+                  .indent
+                    label(for="r2") Resampler?
+                    input.over-sample(type="checkbox", id="r2")
             li
-              label Sample Rate
-              input.sample(type="range", min=0, value=10, max=100, step=5)
-              label Over Sample?
-              input.over-sample(type="checkbox")
-            li
-              label Sample Rate
-              input.sample(type="range", min=0, value=5, max=100, step=5)
-              label Over Sample?
-              input.over-sample(type="checkbox")
-            li
-              label Clear Between?
-              input.clear-between(type="checkbox", checked="checked")
+              label(for="clear") Clear between draws?
+              input.clear-between(id="clear" type="checkbox", checked="checked")
 
         .section
           .download.btn Download!
