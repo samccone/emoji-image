@@ -45,6 +45,12 @@ $('.video').on "click", ->
     if (err)
       return alert("unable to init video stream, try in chrome!")
 
+    $('.pipeline input[type="range"]').each (i, v) ->
+      $v = $(v)
+
+      if parseInt($v.val(), 10) < 10 && parseInt($v.val() , 10) > 0
+        $v.val(15)
+
     video.src = objUrl.createObjectURL(stream)
     video.play()
     setTimeout (-> worker.processVideo(video)), 60
