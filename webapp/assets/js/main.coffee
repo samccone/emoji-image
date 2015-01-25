@@ -20,7 +20,7 @@ $('.picker .static').on "click", ->
     $this.css('background-image').match(/url\((.*)\)/)[1]
   )
 
-$('input').on "change", ->
+$('input[type="file"]').on "change", ->
   if (!this.files[0].name.match(/\.png|\.jpg|\.jpeg/))
     alert("This only works with jpg or png sorry :(")
     return
