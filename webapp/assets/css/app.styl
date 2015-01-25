@@ -14,18 +14,22 @@ body
   clear: both
 
 #app
-  min-width: 786px
   width: 95%
   max-width: 1200px
   margin: 20px auto
   border: solid 3px #333333
   border-radius: 5px
   overflow: hidden
-  top: 50%;
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  position: absolute;
 
+  +above(1024px)
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%);
+    position: absolute;
+
+  +below(1024px)
+    width: 100%
+    margin-top: 0
 
 .art
   width: 100%
@@ -57,6 +61,11 @@ canvas
 
   canvas
     width: 100%
+
+  +below(1024px)
+    position: absolute
+    left: 0
+    height: 100%
 
 .pipeline
   padding: 0 10px

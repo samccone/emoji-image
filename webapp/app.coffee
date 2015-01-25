@@ -1,11 +1,12 @@
 ClientTemplates = require 'client-templates'
 browserify      = require 'roots-browserify'
 autoprefixer = require('autoprefixer-stylus')
+rupture = require('rupture')
 
 module.exports =
   ignores: ['.divshot-cache', 'readme.md'],
   stylus:
-    use: [autoprefixer()]
+    use: [autoprefixer(), rupture()]
 
   extensions: [
     ClientTemplates(
