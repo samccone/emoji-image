@@ -1,6 +1,12 @@
 worker = require("./worker")
 
+getMedia = require("../../bower_components/getUserMedia/index-browser")
 $ = require("../../bower_components/jquery/dist/jquery.min.js")
+video = document.createElement('video')
+video.setAttribute('width', '500px')
+video.setAttribute('height', '500px')
+
+objUrl = if window.webkitURL then webkitURL else URL
 
 $('.picker .static').on "click", ->
   $this = $(this)
@@ -19,12 +25,20 @@ $('input').on "change", ->
     alert("This only works with jpg or png sorry :(")
     return
 
-  klass = if window.webkitURL then webkitURL else URL
 
-  if (!klass?)
+  if (!objUrl?)
     alert("Local file API is not enabled on your browser. Try Chrome, or Safari")
     return
 
-  url = klass.createObjectURL(this.files[0])
+  url = objUrl.createObjectURL(this.files[0])
 
   worker.process(url)
+
+$('.video').on "click", ->
+  getMedia {audio:false,video:true}, (err, stream) ->
+    if (err)
+      return alert("unable to init video stream, try in chrome!")
+
+    video.src = objUrl.createObjectURL(stream)
+    video.play()
+    setTimeout (-> worker.processVideo(video)), 60

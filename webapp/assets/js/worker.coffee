@@ -1,3 +1,11 @@
+window.requestAnimFrame = (->
+  return  window.requestAnimationFrame       or
+          window.webkitRequestAnimationFrame or
+          window.mozRequestAnimationFrame    or
+          ->
+            window.setTimeout(callback, 1000 / 60);
+)()
+
 sprite     = new Image()
 sprite.src = "/images/base.png"
 ctx = ctx2 = spriteCtx = null;
@@ -66,42 +74,11 @@ run = (url) ->
 
     img.src = url
 
+processVideo = (video) ->
+  ctx.drawImage(video, 0,0)
+  process(20, ctx, video);
+  requestAnimationFrame processVideo.bind(this, video);
+
 module.exports =
   process: run
-      # var ctx;
-      # var sprite, spriteCtx;
-
-      # //- function snip() {
-      # //-   ctx.drawImage(vid, 0,0)
-      # //-   process(200, ctx2);
-      # //-   //- process(50, ctx2);
-      # //-   //- process(25, ctx);
-      # //-   //- process(20, ctx);
-      # //-   //- process(8, ctx2);
-      # //-   requestAnimationFrame(snip);
-      # //- }
-
-      # var sprite = new Image()
-      #   process(10, ctx);
-      #   //- process(40, ctx2);
-      #   //- process(40, ctx2);
-      #   //- process(40, ctx2);
-      #   //- process(40, ctx1);
-      #   //- process(40, ctx1);
-      #   //- process(40, ctx1);
-      #   //- process(40, ctx1);
-      #   //- process(40, ctx1);
-      #   //- process(40, ctx1);
-      #   //- process(10, ctx);
-      #   //- process(15, ctx);
-      #   //- process(3, ctx);
-      # }
-
-
-      # //- navigator.webkitGetUserMedia({video: true, audio: false}, function(stream){
-      # //-   vid = document.querySelector("video");
-      # //-   vid.src = window.URL.createObjectURL(stream);
-      # //-   vid.play()
-      # //-   requestAnimationFrame(snip)
-      # //- }, function(){})
-
+  processVideo: processVideo

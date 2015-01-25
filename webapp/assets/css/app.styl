@@ -51,13 +51,17 @@ body
     &:hover
       opacity: 0.85
 
-.picker li.image
-  cursor: pointer
-  background-color: #FFF
-  background-image: url("/images/image_upload.png")
-  background-size: 30%;
-  background-repeat: no-repeat;
-  background-position: center center;
+.picker
+  li.image, li.video
+    cursor: pointer
+    background-color: #FFF
+    background-image: url("/images/image_upload.png")
+    background-size: 30%;
+    background-repeat: no-repeat;
+    background-position: center center;
+
+  li.video
+    background-image: url("/images/video.png")
 
   input
     cursor: pointer
