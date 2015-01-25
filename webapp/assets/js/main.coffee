@@ -16,7 +16,12 @@ $('.picker .static').on "click", ->
   $('.active').removeClass('active')
   $this.addClass('active')
 
+
   worker.stopVideo(video)
+  d = JSON.parse($(this).attr('config'))
+
+  $('.pipeline input[type="range"]').each (i, v) ->
+    $(v).val(d[i])
 
   worker.process(
     $this.css('background-image').match(/url\((.*)\)/)[1]

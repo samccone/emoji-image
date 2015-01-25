@@ -11,10 +11,10 @@ html
         .picker
           .headline.section examples
           ul
-            li.static.active(style="background-image:url('/images/night.jpg')")
-            li.static(style="background-image:url('/images/melting.jpg')")
-            li.static(style="background-image:url('/images/hsv.png')")
-            li.static(style="background-image:url('/images/heart_eyes.png')")
+            li.static.active(style="background-image:url('/images/night.jpg')", config="[50, 10, 5]")
+            li.static(style="background-image:url('/images/melting.jpg')", config="[50, 5, 5]")
+            li.static(style="background-image:url('/images/hsv.png')", config="[20, 10, 15]")
+            li.static(style="background-image:url('/images/heart_eyes.png')", config="[15, 0, 0]")
           .cl
         .art
           canvas(style="display: none")
@@ -30,6 +30,7 @@ html
             .btn.video Video
 
         .pipeline
+          .headline Customize it
           ul
             li
               label Sample Rate 1
