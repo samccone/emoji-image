@@ -42,3 +42,6 @@ $('.video').on "click", ->
     video.src = objUrl.createObjectURL(stream)
     video.play()
     setTimeout (-> worker.processVideo(video)), 60
+
+$('.download').on "click", ->
+  window.open($('canvas').eq(1)[0].toDataURL())
