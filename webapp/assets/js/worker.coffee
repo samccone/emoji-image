@@ -117,9 +117,12 @@ startProcessVideo = (video) ->
   processVideo(video)
 
 processVideo = (video) ->
-  ctx.drawImage(video, 0,0)
-  runPipeline(video)
-  videoLoop = requestAnimationFrame(processVideo.bind(this, video))
+  try
+    ctx.drawImage(video, 0,0)
+    runPipeline(video)
+    videoLoop = requestAnimationFrame(processVideo.bind(this, video))
+  catch
+    setTimeout (-> processVideo(video)), 100
 
 stopVideo = (video) ->
   video.pause()
