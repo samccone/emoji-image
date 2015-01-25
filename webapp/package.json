@@ -2,7 +2,7 @@
   "name": "goat-front-end",
   "scripts": {
     "watch": "roots watch",
-    "deploy": "roots compile && divshot push"
+    "deploy": "roots compile && divshot deploy production"
   },
   "devDependencies": {
     "roots": "^3.0.0"
