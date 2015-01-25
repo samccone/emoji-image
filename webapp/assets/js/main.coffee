@@ -34,9 +34,13 @@ $('input[type="file"]').on "change", ->
 
   url = objUrl.createObjectURL(this.files[0])
 
+  $('.active').removeClass('active')
+
   worker.process(url)
 
 $('.video').on "click", ->
+  $('.active').removeClass('active')
+
   getMedia {audio:false,video:true}, (err, stream) ->
     if (err)
       return alert("unable to init video stream, try in chrome!")
