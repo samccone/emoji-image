@@ -17,12 +17,13 @@ html
             li
       .picker
         ul
-          li.active(style="background-image:url('/images/night.jpg')")
-          li(style="background-image:url('/images/hsv.png')")
-          li(style="background-image:url('/images/heart_eyes.png')")
-          li(style="background-image:url('/images/night.jpg')")
-          li(style="background-image:url('/images/night.jpg')")
-          li(style="background-image:url('/images/night.jpg')")
+          li.static.active(style="background-image:url('/images/night.jpg')")
+          li.static(style="background-image:url('/images/hsv.png')")
+          li.static(style="background-image:url('/images/heart_eyes.png')")
+          li.static(style="background-image:url('/images/night.jpg')")
+          li.image
+            input(type="file")
+          li.video()
 
   script(src="/js/color_hard_map.js")
   script(src="/js/main.js")
