@@ -2,8 +2,8 @@ ClientTemplates = require 'client-templates'
 browserify      = require 'roots-browserify'
 
 module.exports =
- extensions: [
-    ignores: ['.divshot-cache', 'readme.md'],
+  ignores: ['.divshot-cache', 'readme.md'],
+  extensions: [
     ClientTemplates(
       base: "views/templates/",
       pattern: "**/*.jade",
