@@ -1,5 +1,8 @@
 {
   "name": "goat-front-end",
+  "scripts": {
+    "watch": "roots watch"
+  },
   "devDependencies": {
     "roots": "^3.0.0"
   },
