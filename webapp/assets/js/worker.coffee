@@ -37,12 +37,17 @@ runPipeline = (src) ->
 runSampler = (src) ->
   if ($('.clear-between').is(":checked"))
     $canvas2 = $(document.getElementsByTagName('canvas')[1])
-    ctx2.clearRect(0, 0, $canvas2.width(), $canvas2.height())
+    window.requestAnimFrame ->
+      ctx2.clearRect(0, 0, $canvas2.width(), $canvas2.height())
 
   $('.pipeline li').each (i, v) ->
-    sampleRate = parseInt($(v).find('.sample').val(), 10)
-    if sampleRate > 0
-      process(sampleRate, ctx, src)
+    window.requestAnimFrame ->
+      $v = $(v)
+      sampleRate = parseInt($v.find('.sample').val(), 10)
+      ctxSampler = if $v.find('.over-sample').is(":checked") then ctx2 else ctx
+
+      if sampleRate > 0
+        process(sampleRate, ctxSampler, src)
 
 process = (size, context, img) ->
   size = size || 8;
