@@ -1,3 +1,5 @@
+$ = require("../../bower_components/jquery/dist/jquery.min.js")
+
 window.requestAnimFrame = (->
   return  window.requestAnimationFrame       or
           window.webkitRequestAnimationFrame or
@@ -26,6 +28,21 @@ getIndex = (x,y,width,d) ->
     ~~(Math.min(31, Math.max(d[index+1] / 8, 0))),
     ~~(Math.min(31, Math.max(d[index+2] / 8, 0)))
   ]
+
+runPipeline = (src) ->
+  $('.pipeline input').off("change")
+  $('.pipeline input').on "change", -> runSampler(src)
+  runSampler(src)
+
+runSampler = (src) ->
+  if ($('.clear-between').is(":checked"))
+    $canvas2 = $(document.getElementsByTagName('canvas')[1])
+    ctx2.clearRect(0, 0, $canvas2.width(), $canvas2.height())
+
+  $('.pipeline li').each (i, v) ->
+    sampleRate = parseInt($(v).find('.sample').val(), 10)
+    if sampleRate > 0
+      process(sampleRate, ctx, src)
 
 process = (size, context, img) ->
   size = size || 8;
@@ -68,15 +85,13 @@ run = (url) ->
 
       ctx.drawImage(img, 0, 0)
 
-      process(20, ctx, img)
-      # process(5, ct2, img)
-      # process(20, ctx2, img)
+      runPipeline(img)
 
     img.src = url
 
 processVideo = (video) ->
   ctx.drawImage(video, 0,0)
-  process(20, ctx, video);
+  runPipeline(video)
   requestAnimationFrame processVideo.bind(this, video);
 
 module.exports =

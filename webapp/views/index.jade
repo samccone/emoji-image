@@ -13,9 +13,19 @@ html
         .pipeline
           ul
             li
+              label Sample Rate
+              input.sample(type="range", min=0, value=20, max=100, step=5)
             li
+              label Sample Rate
+              input.sample(type="range", min=0, value=20, max=100, step=5)
             li
-      .picker
+              label Sample Rate
+              input.sample(type="range", min=0, value=20, max=100, step=5)
+            li
+              label Clear Between?
+              input.clear-between(type="checkbox" value="true")
+
+      .picker.cl
         ul
           li.static.active(style="background-image:url('/images/night.jpg')")
           li.static(style="background-image:url('/images/hsv.png')")
