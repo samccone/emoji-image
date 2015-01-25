@@ -106,6 +106,13 @@ run = (url) ->
     img.src = url
 
 startProcessVideo = (video) ->
+  canvas = document.getElementsByTagName('canvas')[0]
+  canvas.setAttribute('width', '600px')
+  canvas.setAttribute('height', '400px')
+  canvas2 = document.getElementsByTagName('canvas')[1]
+  canvas2.setAttribute('width', '600px')
+  canvas2.setAttribute('height', '400px')
+
   clearDrawCanvas()
   processVideo(video)
 

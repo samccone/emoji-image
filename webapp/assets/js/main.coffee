@@ -3,8 +3,8 @@ worker = require("./worker")
 getMedia = require("../../bower_components/getUserMedia/index-browser")
 $ = require("../../bower_components/jquery/dist/jquery.min.js")
 video = document.createElement('video')
-video.setAttribute('width', '500px')
-video.setAttribute('height', '500px')
+video.setAttribute('width', '600px')
+video.setAttribute('height', '400px')
 
 objUrl = if window.webkitURL then webkitURL else URL
 
