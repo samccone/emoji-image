@@ -3,12 +3,23 @@ doctype html
 html
   head
     link(href="/css/app.css", rel="stylesheet")
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans', rel='stylesheet', type='text/css')
+
   body
     #app
       .left.main-pane
+        .picker
+          .picker-headline examples
+          ul
+            li.static.active(style="background-image:url('/images/night.jpg')")
+            li.static(style="background-image:url('/images/melting.jpg')")
+            li.static(style="background-image:url('/images/hsv.png')")
+            li.static(style="background-image:url('/images/heart_eyes.png')")
         .art
           canvas(style="display: none")
           canvas
+
+
       .left.secondary
         .pipeline
           ul
@@ -31,15 +42,9 @@ html
             li
               button.download download!
 
-      .picker.cl
-        ul
-          li.static.active(style="background-image:url('/images/night.jpg')")
-          li.static(style="background-image:url('/images/melting.jpg')")
-          li.static(style="background-image:url('/images/hsv.png')")
-          li.static(style="background-image:url('/images/heart_eyes.png')")
-          li.image
-            input(type="file")
-          li.video()
+          //- li.image
+          //-   input(type="file")
+          //- li.video()
 
   script(src="/js/color_hard_map.js")
   script(src="/js/main.js")
