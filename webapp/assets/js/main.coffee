@@ -16,6 +16,8 @@ $('.picker .static').on "click", ->
   $('.active').removeClass('active')
   $this.addClass('active')
 
+  worker.stopVideo(video)
+
   worker.process(
     $this.css('background-image').match(/url\((.*)\)/)[1]
   )

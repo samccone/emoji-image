@@ -1,12 +1,20 @@
 $ = require("../../bower_components/jquery/dist/jquery.min.js")
+videoLoop = null
 
-window.requestAnimFrame = (->
-  return  window.requestAnimationFrame       or
-          window.webkitRequestAnimationFrame or
-          window.mozRequestAnimationFrame    or
-          ->
-            window.setTimeout(callback, 1000 / 60);
-)()
+do ->
+  w = window
+  for vendor in ['ms', 'moz', 'webkit', 'o']
+      break if w.requestAnimationFrame
+      w.requestAnimationFrame = w["#{vendor}RequestAnimationFrame"]
+      w.cancelAnimationFrame = (w["#{vendor}CancelAnimationFrame"] or
+                                w["#{vendor}CancelRequestAnimationFrame"])
+
+  targetTime = 0
+  w.requestAnimationFrame or= (callback) ->
+      targetTime = Math.max targetTime + 16, currentTime = +new Date
+      w.setTimeout (-> callback +new Date), targetTime - currentTime
+
+  w.cancelAnimationFrame or= (id) -> clearTimeout id
 
 sprite     = new Image()
 sprite.src = "/images/base.png"
@@ -37,11 +45,11 @@ runPipeline = (src) ->
 runSampler = (src) ->
   if ($('.clear-between').is(":checked"))
     $canvas2 = $(document.getElementsByTagName('canvas')[1])
-    window.requestAnimFrame ->
+    window.requestAnimationFrame ->
       ctx2.clearRect(0, 0, $canvas2.width(), $canvas2.height())
 
   $('.pipeline li').each (i, v) ->
-    window.requestAnimFrame ->
+    window.requestAnimationFrame ->
       $v = $(v)
       sampleRate = parseInt($v.find('.sample').val(), 10)
       ctxSampler = if $v.find('.over-sample').is(":checked") then ctx2 else ctx
@@ -97,8 +105,13 @@ run = (url) ->
 processVideo = (video) ->
   ctx.drawImage(video, 0,0)
   runPipeline(video)
-  requestAnimationFrame processVideo.bind(this, video);
+  videoLoop = requestAnimationFrame(processVideo.bind(this, video))
+
+stopVideo = (video) ->
+  video.pause()
+  window.cancelAnimationFrame(videoLoop)
 
 module.exports =
   process: run
   processVideo: processVideo
+  stopVideo: stopVideo
