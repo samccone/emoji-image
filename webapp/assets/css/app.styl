@@ -17,8 +17,9 @@ body
   width: 95%
   max-width: 1200px
   margin: 20px auto
-  border: solid 1px #333333
-  border-radius: 3px
+  border: solid 3px #333333
+  border-radius: 5px
+  overflow: hidden
   top: 50%;
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
@@ -27,16 +28,17 @@ body
 
 .art
   width: 100%
+  padding: 30px
 
 canvas
   background: #111111
 
-.picker-headline
+.headline
   color: #939393
   background: #111
   text-transform: uppercase
-  font-size: 14px
-  padding: 13px
+  font-size: 13px
+  padding: 19px
 
 .secondary
   width: 30%
@@ -45,6 +47,10 @@ canvas
   position: absolute
   left: 70%
   top: 0
+
+  .headline
+    background: transparent
+    color: #898989
 
 .main-pane
   width: 70%
@@ -56,24 +62,26 @@ canvas
   padding: 0 10px
 
 .picker
-  height: 100px
+  height: 120px
   position: relative
+  background: #111111
+  overflow: hidden
+
   ul
     display: block
     height: 100%
     width: 100%
 
   li
-    top: 5%
-    height: 90%
+    height: 100%
     width: 25%
     float: left
     background-size: cover
     background-position: center center
     position: relative
-    opacity: 0.5
+    opacity: 0.4
     cursor: pointer
-    border: solid 4px #212121
+    border-left: solid 4px #212121
 
     &.active
       opacity: 1
@@ -86,21 +94,30 @@ label
   display: block
   margin: 10px 0
 
-.picker
-  li.image, li.video
-    cursor: pointer
-    background-color: #FFF
-    background-image: url("/images/image_upload.png")
-    background-size: 30%;
-    background-repeat: no-repeat;
-    background-position: center center;
-
-  li.video
-    background-image: url("/images/video.png")
-
+.image
   input
     cursor: pointer
-    position: relative
+    position: absolute
     height: 100%
     width: 100%
     opacity: 0
+    top: 0
+    left: 0
+
+.btn
+  color: #FFF
+  font-size: 15px
+  padding: 10px 20px
+  text-align: center
+  border-radius: 4px
+  position: relative
+  cursor: pointer
+
+  &.image
+    background: #3c8aff
+
+  &.video
+    background: #ff5c3c
+
+  &.download
+    background: #555555

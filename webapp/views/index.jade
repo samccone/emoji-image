@@ -9,18 +9,26 @@ html
     #app
       .left.main-pane
         .picker
-          .picker-headline examples
+          .headline examples
           ul
             li.static.active(style="background-image:url('/images/night.jpg')")
             li.static(style="background-image:url('/images/melting.jpg')")
             li.static(style="background-image:url('/images/hsv.png')")
             li.static(style="background-image:url('/images/heart_eyes.png')")
+          .cl
         .art
           canvas(style="display: none")
           canvas
 
 
       .left.secondary
+        .headline make your own
+        .section
+          .btn-group
+            .btn.image Upload
+              input(type="file")
+            .btn.video Video
+
         .pipeline
           ul
             li
@@ -39,12 +47,9 @@ html
             li
               label Clear Between?
               input.clear-between(type="checkbox", checked="checked")
-            li
-              button.download download!
 
-          //- li.image
-          //-   input(type="file")
-          //- li.video()
+          .section
+            .download.btn Download!
 
   script(src="/js/color_hard_map.js")
   script(src="/js/main.js")
