@@ -5,4 +5,4 @@ generate the sparse rgb info
 
 generate the bloomed 3D array
 
-`npm color_map.js`
+`node color_map.js`
